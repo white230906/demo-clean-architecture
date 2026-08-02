@@ -29,4 +29,8 @@
       <ProjectReference Include="..\mini_1_helpdesk_ticket.Service\mini_1_helpdesk_ticket.Service.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Document\" />
+    </ItemGroup>
+
 </Project>

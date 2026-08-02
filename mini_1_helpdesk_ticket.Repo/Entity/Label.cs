@@ -7,7 +7,7 @@ public class Label: BaseEntity<Guid>, IAuditableEntity
     
     public string Name { get; set; } = null!;
     public string Slug { get; set; } = null!;
-    public string? Color { get; set; }
+    public string Color { get; set; } = null!;
     
     public ICollection<TicketLabel> TicketLabels { get; set; } = new List<TicketLabel>();
     
