@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using MailService = mini_1_helpdesk_ticket.Service.MailService;
 using JwtService = mini_1_helpdesk_ticket.Service.JwtService;
-
+using LabelService = mini_1_helpdesk_ticket.Service.Labels;
 
     var builder = WebApplication.CreateBuilder(args);
     
@@ -28,8 +28,11 @@ using JwtService = mini_1_helpdesk_ticket.Service.JwtService;
 
     builder.Services.AddScoped<MailService.IService, MailService.Service>();
     builder.Services.AddScoped<JwtService.IService, JwtService.Service>();
-    builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
+    builder.Services.AddScoped<LabelService.IService, LabelService.Service>();
 
+    builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
+    builder.Services.AddScoped<TicketCodeGenerator>();
+    
     //builder.Services.AddValidatorsFromAssembly(AssemblyReference.Assembly);
 
     builder.Services.AddCors(options =>

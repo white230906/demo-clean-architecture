@@ -2,7 +2,7 @@
 
 namespace mini_1_helpdesk_ticket.Repo.Entity;
 
-public class TicketLabel: BaseEntity<Guid>
+public class TicketLabel
 {
     public Guid TicketId { get; set; }
     public Guid LabelId { get; set; }

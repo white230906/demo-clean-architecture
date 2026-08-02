@@ -3,7 +3,8 @@ using mini_1_helpdesk_ticket.Repo.Entity;
 
 namespace mini_1_helpdesk_ticket.Repo;
 
-public class HelpdeskDbContext(DbContextOptions options) : DbContext(options)
+public class HelpdeskDbContext(
+    DbContextOptions<HelpdeskDbContext> options) : DbContext(options)
 {
     
     public DbSet<Ticket> Tickets => Set<Ticket>();

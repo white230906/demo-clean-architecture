@@ -1,7 +1,5 @@
 ﻿using mini_1_helpdesk_ticket.Repo.Abstraction;
 using mini_1_helpdesk_ticket.Repo.Enum;
-using Superpower.Parsers;
-
 namespace mini_1_helpdesk_ticket.Repo.Entity;
 
 public class Ticket: BaseEntity<Guid>, IAuditableEntity
