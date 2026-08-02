@@ -41,6 +41,7 @@ public class TicketConfiguration: IEntityTypeConfiguration<Ticket>
 
         builder.Property(x => x.Description)
             .HasColumnType("text")
+            .HasMaxLength(5000)
             .IsRequired();
 
         builder.Property(x => x.Priority)

@@ -465,6 +465,8 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# don't push .md
+*.md
 # Windows shortcuts
 *.lnk
 

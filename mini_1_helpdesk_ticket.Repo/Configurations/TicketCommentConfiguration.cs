@@ -22,7 +22,10 @@ public class TicketCommentConfiguration: IEntityTypeConfiguration<TicketComment>
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.AuthorName).HasMaxLength(150).IsRequired();
-        builder.Property(x => x.Content).HasColumnType("text").IsRequired();
+        builder.Property(x => x.Content)
+            .HasColumnType("text")
+            .HasMaxLength(5000)
+            .IsRequired();
 
         builder.HasOne(x => x.Ticket)
             .WithMany(x => x.TicketComments)
