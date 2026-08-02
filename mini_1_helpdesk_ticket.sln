@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini_1_helpdesk_ticket.Repo", "mini_1_helpdesk_ticket.Repo\mini_1_helpdesk_ticket.Repo.csproj", "{3FB35D3A-5678-4A8E-A2CE-EE374706F9B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini_1_helpdesk_ticket.Service", "mini_1_helpdesk_ticket.Service\mini_1_helpdesk_ticket.Service.csproj", "{696639B6-DB9C-4B23-94FE-7CAEEBD53057}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini_1_helpdesk_ticket.API", "mini_1_helpdesk_ticket.API\mini_1_helpdesk_ticket.API.csproj", "{C43F6558-FCAC-47F1-A8AC-FAC1F6FDCC2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FB35D3A-5678-4A8E-A2CE-EE374706F9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB35D3A-5678-4A8E-A2CE-EE374706F9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB35D3A-5678-4A8E-A2CE-EE374706F9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB35D3A-5678-4A8E-A2CE-EE374706F9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696639B6-DB9C-4B23-94FE-7CAEEBD53057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696639B6-DB9C-4B23-94FE-7CAEEBD53057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696639B6-DB9C-4B23-94FE-7CAEEBD53057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696639B6-DB9C-4B23-94FE-7CAEEBD53057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C43F6558-FCAC-47F1-A8AC-FAC1F6FDCC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C43F6558-FCAC-47F1-A8AC-FAC1F6FDCC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C43F6558-FCAC-47F1-A8AC-FAC1F6FDCC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C43F6558-FCAC-47F1-A8AC-FAC1F6FDCC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
