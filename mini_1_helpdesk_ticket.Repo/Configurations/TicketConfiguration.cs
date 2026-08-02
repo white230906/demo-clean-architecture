@@ -13,11 +13,11 @@ public class TicketConfiguration: IEntityTypeConfiguration<Ticket>
         {
             table.HasCheckConstraint(
                 "ck_tickets_title_not_blank",
-                "length(brim(title)) > 0");
+                "length(btrim(title)) > 0");
             
             table.HasCheckConstraint(
                 "ck_tickets_description_not_blank",
-                "length(brim(description)) > 0");
+                "length(btrim(description)) > 0");
 
             table.HasCheckConstraint(
                 "ck_tickets_priority_valid",
@@ -48,6 +48,9 @@ public class TicketConfiguration: IEntityTypeConfiguration<Ticket>
             .HasConversion<string>()
             .HasMaxLength(20)
             .HasDefaultValue(TicketPriority.Medium)
+            //config default C#: Low # default db: Medium -> Bug
+            //If no input -> take medium to default | contract, take by user
+            .HasSentinel((TicketPriority)(-1))
             .IsRequired();
 
         builder.Property(x => x.Status)

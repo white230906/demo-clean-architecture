@@ -3,6 +3,7 @@ using mini_1_helpdesk_ticket.API.Extensions;
 using mini_1_helpdesk_ticket.API.Middleware;
 using mini_1_helpdesk_ticket.Repo;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MailService = mini_1_helpdesk_ticket.Service.MailService;
 using JwtService = mini_1_helpdesk_ticket.Service.JwtService;
 
@@ -13,10 +14,11 @@ using JwtService = mini_1_helpdesk_ticket.Service.JwtService;
     // Add services to the container.
     builder.Services.AddEndpointsApiExplorer();
 
-    builder.Services.AddDbContext<AppDbContext>(options =>
+    builder.Services.AddDbContext<HelpdeskDbContext>(options =>
         options.UseNpgsql(
             builder.Configuration.GetConnectionString("DefaultConnection")
         )
+        .UseSnakeCaseNamingConvention()
     );
 
     builder.Services.ConfigureRateLimiter();

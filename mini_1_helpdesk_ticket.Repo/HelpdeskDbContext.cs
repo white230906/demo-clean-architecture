@@ -3,7 +3,7 @@ using mini_1_helpdesk_ticket.Repo.Entity;
 
 namespace mini_1_helpdesk_ticket.Repo;
 
-public class AppDbContext(DbContextOptions options) : DbContext(options)
+public class HelpdeskDbContext(DbContextOptions options) : DbContext(options)
 {
     
     public DbSet<Ticket> Tickets => Set<Ticket>();
@@ -13,7 +13,11 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        modelBuilder.HasSequence<long>("ticket_code_seq")
+            .StartsAt(1)
+            .IncrementsBy(1);
+        
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(HelpdeskDbContext).Assembly);
         //modelBuilder.SeedData();
     }
 
