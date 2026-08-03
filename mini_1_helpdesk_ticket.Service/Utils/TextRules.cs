@@ -20,11 +20,11 @@ public static partial class TextRules
         return trimmed;
     }
 
-    // public static string? NullIfWhiteSpace(string? value)
-    // {
-    //     var trimmed = value?.Trim();
-    //     return string.IsNullOrWhiteSpace(trimmed) ? null : trimmed;
-    // }
+    public static string? NullIfWhiteSpace(string? value)
+    {
+        var trimmed = value?.Trim();
+        return string.IsNullOrWhiteSpace(trimmed) ? null : trimmed;
+    }
 
     public static string ToSlug(string value)
     {
