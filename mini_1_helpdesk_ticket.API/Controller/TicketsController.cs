@@ -24,7 +24,7 @@ public class TicketsController: ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetListTickets([FromQuery] Request.TicketFilter filter, CancellationToken ct)
     {
-        var result = _ticketService.GetTickets(filter, ct);
+        var result = await _ticketService.GetTickets(filter, ct);
         return Ok(ApiResponseFactory.Base(result, traceId: HttpContext.TraceIdentifier));
     }
 

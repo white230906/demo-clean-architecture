@@ -304,8 +304,8 @@ public class Service: IService
                 LabelId = labelId,
             });
         
-        _dbContext.TicketLabels.RemoveRange(linksToAdd);
-        _dbContext.TicketLabels.AddRange(linksToRemove);
+        _dbContext.TicketLabels.RemoveRange(linksToRemove);
+        _dbContext.TicketLabels.AddRange(linksToAdd);
         
         await _dbContext.SaveChangesAsync(ct);
 
