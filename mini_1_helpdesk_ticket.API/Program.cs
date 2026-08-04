@@ -1,4 +1,5 @@
 using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
 using mini_1_helpdesk_ticket.API.Extensions;
 using mini_1_helpdesk_ticket.API.Middleware;
 using mini_1_helpdesk_ticket.Repo;
@@ -11,7 +12,8 @@ using TicketService =  mini_1_helpdesk_ticket.Service.Tickets;
 
     var builder = WebApplication.CreateBuilder(args);
     
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
     // Add services to the container.
     builder.Services.AddEndpointsApiExplorer();
 
