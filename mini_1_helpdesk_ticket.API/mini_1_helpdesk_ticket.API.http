@@ -1,6 +1,0 @@
-@mini_1_helpdesk_ticket.API_HostAddress = http://localhost:5095
-
-GET {{mini_1_helpdesk_ticket.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
