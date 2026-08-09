@@ -468,6 +468,7 @@ $RECYCLE.BIN/
 # Keep internal Markdown documents private while publishing the repository README.
 **/[Dd]ocument/**/*.md
 !/README.md
+!/mini_1_helpdesk_ticket.API/Document/service-sequence-diagrams.md
 # Windows shortcuts
 *.lnk
 

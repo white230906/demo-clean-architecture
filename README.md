@@ -75,6 +75,10 @@ dotnet test
 | `POST` | `/api/tickets/{id}/comments` | Thêm comment |
 | `PUT` | `/api/tickets/{id}/labels` | Thay thế danh sách label |
 
+## Sequence diagram
+
+Xem [sequence diagram của Labels.Service và Tickets.Service](mini_1_helpdesk_ticket.API/Document/service-sequence-diagrams.md), gồm đầy đủ 10 hàm nghiệp vụ và các nhánh xử lý chính.
+
 ## Lưu ý bảo mật tài liệu
 
-Các file Markdown bên trong thư mục `Document` là tài liệu nội bộ và được loại khỏi Git bằng `.gitignore`. `README.md` ở thư mục gốc không bị ignore nên có thể được công khai trên repository.
+Ngoại trừ file sequence diagram được công khai ở trên, các file Markdown khác bên trong thư mục `Document` là tài liệu nội bộ và được loại khỏi Git bằng `.gitignore`.
