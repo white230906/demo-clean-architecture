@@ -2,11 +2,61 @@
 
 Tài liệu này mô tả 10 hàm nghiệp vụ public được khai báo trong hai class Service thuộc các folder Labels và Tickets. Mỗi mục ghi rõ hàm tương ứng ngay phía trên code Mermaid.
 
+## Database ER diagram
+
+Sơ đồ dưới đây mô tả bốn bảng được sử dụng bởi Labels.Service và Tickets.Service.
+
+```mermaid
+erDiagram
+    TICKETS {
+        uuid id PK
+        varchar code UK
+        varchar title
+        text description
+        varchar priority
+        varchar status
+        varchar assignee_name
+        boolean is_deleted
+        datetime created_at
+        datetime updated_at
+        xid xmin
+    }
+
+    TICKET_COMMENTS {
+        uuid id PK
+        uuid ticket_id FK
+        varchar author_name
+        text content
+        boolean is_deleted
+        datetime created_at
+        datetime updated_at
+    }
+
+    LABELS {
+        uuid id PK
+        varchar name
+        varchar slug UK
+        varchar color
+        boolean is_deleted
+        datetime created_at
+        datetime updated_at
+    }
+
+    TICKET_LABELS {
+        uuid ticket_id PK, FK
+        uuid label_id PK, FK
+    }
+
+    TICKETS ||--o{ TICKET_COMMENTS : has
+    TICKETS ||--o{ TICKET_LABELS : tagged_with
+    LABELS ||--o{ TICKET_LABELS : assigned_to
+```
+
 ## Labels.Service
 
 ### Hàm: GetLabels(CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Labels.Service
@@ -21,11 +71,11 @@ sequenceDiagram
     DB-->>DbContext: Các label phù hợp
     DbContext-->>Service: ToListAsync(ct)
     Service-->>Caller: IReadOnlyList LabelResponse
-~~~
+```
 
 ### Hàm: CreateLabel(CreateLabelRequest request, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Labels.Service
@@ -57,11 +107,11 @@ sequenceDiagram
 
     Service->>Service: Map Label thành LabelResponse
     Service-->>Caller: LabelResponse
-~~~
+```
 
 ### Hàm: DeleteLabels(List&lt;Guid&gt; labelIds, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Labels.Service
@@ -81,13 +131,13 @@ sequenceDiagram
     DB-->>DbContext: Số label còn lại
     Service->>Service: result = labelIds.Count - count
     Service-->>Caller: Chuỗi Xóa {result} phần tử
-~~~
+```
 
 ## Tickets.Service
 
 ### Hàm: CreateTicket(CreateTicketRequest request, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -112,13 +162,16 @@ sequenceDiagram
     DbContext->>DB: INSERT ticket
     DB-->>DbContext: Ticket đã lưu
     Service->>Service: GetTicket(newTicket.Id, ct)
-    ref over Service,DB: Luồng GetTicket
+    Service->>DbContext: Query ticket mới, comments, labels và xmin
+    DbContext->>DB: SELECT ticket detail
+    DB-->>DbContext: Ticket vừa tạo
+    DbContext-->>Service: TicketDetailResponse
     Service-->>Caller: TicketDetailResponse
-~~~
+```
 
 ### Hàm: GetTicket(Guid id, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -136,11 +189,11 @@ sequenceDiagram
     else Không tìm thấy
         Service-->>Caller: NotFoundException TICKET_NOT_FOUND
     end
-~~~
+```
 
 ### Hàm: GetTickets(TicketFilter filter, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -179,11 +232,11 @@ sequenceDiagram
         Factory-->>Service: BasePaginationResponse
         Service-->>Caller: BasePaginationResponse
     end
-~~~
+```
 
 ### Hàm: UpdateTicket(Guid id, UpdateTicketRequest request, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -216,16 +269,19 @@ sequenceDiagram
             else Cập nhật thành công
                 DB-->>DbContext: Ticket đã cập nhật
                 Service->>Service: GetTicket(id, ct)
-                ref over Service,DB: Luồng GetTicket
+                Service->>DbContext: Query ticket, comments, labels và xmin mới
+                DbContext->>DB: SELECT ticket detail
+                DB-->>DbContext: Ticket mới nhất
+                DbContext-->>Service: TicketDetailResponse
                 Service-->>Caller: TicketDetailResponse mới nhất
             end
         end
     end
-~~~
+```
 
 ### Hàm: AddCommentTicket(Guid ticketId, AddCommentRequest request, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -252,11 +308,11 @@ sequenceDiagram
         Service->>Service: Map CommentResponse
         Service-->>Caller: CommentResponse
     end
-~~~
+```
 
 ### Hàm: ReplaceLabelsTicket(Guid ticketId, ReplaceTicketLabelsRequest request, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -292,11 +348,11 @@ sequenceDiagram
             end
         end
     end
-~~~
+```
 
 ### Hàm: DeleteTicket(Guid id, CancellationToken ct)
 
-~~~mermaid
+```mermaid
 sequenceDiagram
     actor Caller
     participant Service as Tickets.Service
@@ -316,4 +372,4 @@ sequenceDiagram
         DB-->>DbContext: Xóa thành công
         Service-->>Caller: Hoàn tất
     end
-~~~
+```

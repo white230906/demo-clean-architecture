@@ -77,7 +77,7 @@ dotnet test
 
 ## Sequence diagram
 
-Xem [sequence diagram của Labels.Service và Tickets.Service](mini_1_helpdesk_ticket.API/Document/service-sequence-diagrams.md), gồm đầy đủ 10 hàm nghiệp vụ và các nhánh xử lý chính.
+Xem [tài liệu Mermaid của Labels.Service và Tickets.Service](mini_1_helpdesk_ticket.API/Document/service-sequence-diagrams.md), gồm ER diagram database và đầy đủ 10 sequence diagram cho các hàm nghiệp vụ.
 
 ## Lưu ý bảo mật tài liệu
 
