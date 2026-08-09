@@ -465,8 +465,9 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-# don't push .md
-*.md
+# Keep internal Markdown documents private while publishing the repository README.
+**/[Dd]ocument/**/*.md
+!/README.md
 # Windows shortcuts
 *.lnk
 
