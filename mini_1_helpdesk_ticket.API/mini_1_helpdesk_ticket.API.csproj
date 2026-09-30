@@ -30,7 +30,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Document\" />
+      <Folder Include="Document\plan-phase-1\" />
+      <Folder Include="Document\plan-phase-2\" />
     </ItemGroup>
 
 </Project>

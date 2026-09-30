@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini_1_helpdesk_ticket.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini_1_helpdesk_ticket.API", "mini_1_helpdesk_ticket.API\mini_1_helpdesk_ticket.API.csproj", "{C43F6558-FCAC-47F1-A8AC-FAC1F6FDCC2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini-1-helpdesk-ticket.Test", "mini-1-helpdesk-ticket.Test\mini-1-helpdesk-ticket.Test.csproj", "{FB5C498C-6E3E-402A-A230-90822D13E01A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mini_1_helpdesk_ticket.Test", "mini_1_helpdesk_ticket.Test\mini_1_helpdesk_ticket.Test.csproj", "{FB5C498C-6E3E-402A-A230-90822D13E01A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
