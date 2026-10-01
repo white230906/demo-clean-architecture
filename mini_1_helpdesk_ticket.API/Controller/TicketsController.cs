@@ -1,4 +1,3 @@
-﻿using MailKit;
 using Microsoft.AspNetCore.Mvc;
 using mini_1_helpdesk_ticket.Service.Models;
 using mini_1_helpdesk_ticket.Service.Tickets;

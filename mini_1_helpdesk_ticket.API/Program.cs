@@ -1,12 +1,8 @@
-using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
 using mini_1_helpdesk_ticket.API.Extensions;
 using mini_1_helpdesk_ticket.API.Middleware;
 using mini_1_helpdesk_ticket.Repo;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using MailService = mini_1_helpdesk_ticket.Service.MailService;
-using JwtService = mini_1_helpdesk_ticket.Service.JwtService;
 using LabelService = mini_1_helpdesk_ticket.Service.Labels;
 using TicketService =  mini_1_helpdesk_ticket.Service.Tickets;
 
@@ -25,21 +21,14 @@ using TicketService =  mini_1_helpdesk_ticket.Service.Tickets;
     );
 
     builder.Services.ConfigureRateLimiter();
-    builder.Services.AddJwtServices(builder.Configuration);
     builder.Services.AddSwaggerServices();
-    builder.Services.AddHttpContextAccessor();
 
-    builder.Services.AddScoped<MailService.IService, MailService.Service>();
-    builder.Services.AddScoped<JwtService.IService, JwtService.Service>();
     builder.Services.AddScoped<LabelService.IService, LabelService.Service>();
     builder.Services.AddScoped<TicketService.IService, TicketService.Service>();
 
     
     builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
     builder.Services.AddScoped<TicketCodeGenerator>();
-    
-    //builder.Services.AddValidatorsFromAssembly(AssemblyReference.Assembly);
-
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowFrontend", policy =>
@@ -65,10 +54,6 @@ using TicketService =  mini_1_helpdesk_ticket.Service.Tickets;
     app.UseCors("AllowFrontend");
 
     app.UseRateLimiter();
-
-    app.UseAuthentication();
-
-    app.UseAuthorization();
 
     app.MapControllers();
 

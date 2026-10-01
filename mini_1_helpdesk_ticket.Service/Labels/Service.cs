@@ -4,7 +4,6 @@ using mini_1_helpdesk_ticket.Repo.Entity;
 using mini_1_helpdesk_ticket.Service.Exceptions;
 using mini_1_helpdesk_ticket.Service.Utils;
 using Npgsql;
-using StackExchange.Redis;
 
 namespace mini_1_helpdesk_ticket.Service.Labels;
 

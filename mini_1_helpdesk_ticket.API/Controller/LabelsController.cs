@@ -1,4 +1,3 @@
-﻿using CloudinaryDotNet;
 using Microsoft.AspNetCore.Mvc;
 using mini_1_helpdesk_ticket.Service.Labels;
 using mini_1_helpdesk_ticket.Service.Models;
