@@ -1,4 +1,4 @@
-﻿namespace mini_1_helpdesk_ticket.Repo.Abstraction;
+﻿namespace mini_1_helpdesk_ticket.Domain.Common;
 
 public interface IAuditableEntity
 {

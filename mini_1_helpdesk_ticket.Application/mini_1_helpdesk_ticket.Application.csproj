@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\mini_1_helpdesk_ticket.Repo\mini_1_helpdesk_ticket.Repo.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Models\" />
+      <ProjectReference Include="..\mini_1_helpdesk_ticket.Domain\mini_1_helpdesk_ticket.Domain.csproj" />
+        <PackageReference
+                Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+                Version="8.0.0" />
+        
     </ItemGroup>
 
 </Project>

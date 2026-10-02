@@ -1,60 +1,51 @@
 using System.Text.Json.Serialization;
 using mini_1_helpdesk_ticket.API.Extensions;
 using mini_1_helpdesk_ticket.API.Middleware;
-using mini_1_helpdesk_ticket.Repo;
-using Microsoft.EntityFrameworkCore;
-using LabelService = mini_1_helpdesk_ticket.Service.Labels;
-using TicketService =  mini_1_helpdesk_ticket.Service.Tickets;
+using mini_1_helpdesk_ticket.Application;
+using mini_1_helpdesk_ticket.Infrastructure;
 
-    var builder = WebApplication.CreateBuilder(args);
-    
-    builder.Services.AddControllers()
-        .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-    // Add services to the container.
-    builder.Services.AddEndpointsApiExplorer();
+var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddDbContext<HelpdeskDbContext>(options =>
-        options.UseNpgsql(
-            builder.Configuration.GetConnectionString("DefaultConnection")
-        )
-        .UseSnakeCaseNamingConvention()
-    );
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter()));
 
-    builder.Services.ConfigureRateLimiter();
-    builder.Services.AddSwaggerServices();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerServices();
+builder.Services.ConfigureRateLimiter();
 
-    builder.Services.AddScoped<LabelService.IService, LabelService.Service>();
-    builder.Services.AddScoped<TicketService.IService, TicketService.Service>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
-    
-    builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
-    builder.Services.AddScoped<TicketCodeGenerator>();
-    builder.Services.AddCors(options =>
+builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        options.AddPolicy("AllowFrontend", policy =>
-        {
-            policy
-                .WithOrigins("http://localhost:4200")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        });
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
+});
 
+var app = builder.Build();
 
-    var app = builder.Build();
-    app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwaggerAPI();
-    }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwaggerAPI();
+}
 
-    app.UseCors("AllowFrontend");
+app.UseRouting();
+app.UseCors("AllowFrontend");
+app.UseRateLimiter();
 
-    app.UseRateLimiter();
+app.MapControllers();
 
-    app.MapControllers();
-
-    app.Run();
+app.Run();
