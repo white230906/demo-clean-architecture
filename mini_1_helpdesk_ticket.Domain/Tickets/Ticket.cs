@@ -4,15 +4,22 @@ namespace mini_1_helpdesk_ticket.Domain.Tickets;
 
 public class Ticket: BaseEntity<Guid>, IAuditableEntity
 {
-    public string Code { get; set; } = null!;
+    //prevent external can create ticket
+    //var ticket = new Ticket(); Not allowd
+    //var ticket = Ticket.Create(...);
+    private Ticket()
+    {
+    }
+
+    public string Code { get; private set; } = null!;
     public string Title { get; private set; } = null!;
-    public string Description { get; set; } = null!;
-    public TicketPriority Priority { get; set; } = TicketPriority.Medium;
+    public string Description { get; private set; } = null!;
+    public TicketPriority Priority { get; private set; } = TicketPriority.Medium;
     public TicketStatus Status { get; private set; } = TicketStatus.Open;
-    public string? AssigneeName { get; set; } 
+    public string? AssigneeName { get; private set; }
     public uint Version { get; private set; }
     
-    public ICollection<TicketLabel> TicketLabels { get; set; } = new List<TicketLabel>();
+    public ICollection<TicketLabel> TicketLabels { get; private set; } = new List<TicketLabel>();
 
     private readonly List<TicketComment> _ticketComments = [];
 

@@ -9,7 +9,7 @@ public class Request
     {
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public TicketPriority Priority { get; set; }
+        public TicketPriority Priority { get; set; } = TicketPriority.Medium;
         public string? AssigneeName { get; set; }
     }
 

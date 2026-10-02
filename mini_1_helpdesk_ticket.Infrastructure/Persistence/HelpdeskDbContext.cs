@@ -26,12 +26,25 @@ public class HelpdeskDbContext(
         //modelBuilder.SeedData();
     }
     
-    public override Task<int> SaveChangesAsync(
+    public override async Task<int> SaveChangesAsync(
         bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = default)
     {
         ApplyTimestamp();
-        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+
+        try
+        {
+            return await base.SaveChangesAsync(
+                acceptAllChangesOnSuccess,
+                cancellationToken);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            throw new mini_1_helpdesk_ticket.Application.Common.Exceptions.AppException(
+                mini_1_helpdesk_ticket.Application.Common.Exceptions.ErrorType.Conflict,
+                "TICKET_CONCURRENCY_CONFLICT",
+                "Ticket đã được cập nhật bởi request khác. Hãy tải lại dữ liệu mới nhất.");
+        }
     }
     
     private void ApplyTimestamp()
