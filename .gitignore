@@ -465,10 +465,10 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-# Keep internal Markdown documents private while publishing the repository README.
-**/[Dd]ocument/**/*.md
-!/README.md
-!/mini_1_helpdesk_ticket.API/Document/service-sequence-diagrams.md
+# Ignore internal documents, except the Clean Architecture learning notes.
+/mini_1_helpdesk_ticket.API/Document/*
+!/mini_1_helpdesk_ticket.API/Document/clean-architecture/
+!/mini_1_helpdesk_ticket.API/Document/clean-architecture/**
 # Windows shortcuts
 *.lnk
 
